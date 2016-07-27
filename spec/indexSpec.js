@@ -11,10 +11,10 @@ var options = {
 
 
 describe("GET /", function () {
-    it("returns status code 200", function () {
+    it("returns status code 200", function (done) {
         request(options, function (error, response, body) {
-            console.log("aca");
             expect(response.statusCode).toBe(200);
+            done();
         });
     });
 });

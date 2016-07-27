@@ -4,6 +4,6 @@ export class user{
         this.pass=pass;
     }
     isValid(){
-        return false;
+        return true;
     }
 }
