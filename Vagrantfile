@@ -43,13 +43,13 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
+   config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
+    vb.memory = "1024"
+   end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -68,8 +68,9 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-  # config.vm.provision "docker"
+  config.vm.provision "docker"
   config.vm.provision :shell, :inline => "curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -"
+  config.vm.provision :shell, :inline => "docker run --name mippdb -e MYSQL_ROOT_PASSWORD=rootpass -d mysql"
   config.vm.provision :shell, :inline => "sudo apt-get install -y nodejs"
   config.vm.provision :shell, :inline => "sudo mkdir -p /home/vagrant/work"
   config.vm.provision :shell, :inline => "sudo chown vagrant:vagrant /home/vagrant/work"
