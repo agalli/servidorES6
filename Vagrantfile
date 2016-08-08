@@ -24,7 +24,6 @@ Vagrant.configure("2") do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
     config.vm.network "forwarded_port", guest: 3306, host: 3306
-    config.vm.network "forwarded_port", guest: 32768, host: 32768
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -71,8 +70,8 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
   config.vm.provision "docker"
+  config.vm.provision :shell, :inline => " docker run -p 3306:3306 --name mippdb -e MYSQL_ROOT_PASSWORD=rootpass -d mysql"
   config.vm.provision :shell, :inline => "curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -"
-  config.vm.provision :shell, :inline => "docker run --name mippdb -e MYSQL_ROOT_PASSWORD=rootpass -d mysql"
   config.vm.provision :shell, :inline => "sudo apt-get install -y nodejs"
   config.vm.provision :shell, :inline => "sudo mkdir -p /home/vagrant/work"
   config.vm.provision :shell, :inline => "sudo chown vagrant:vagrant /home/vagrant/work"
